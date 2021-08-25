@@ -1,0 +1,114 @@
+참고:
+http://yonggyo.com:60000/yonggyo/lecture/-/tree/master/3.%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EA%B5%AC%ED%98%84/%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0(Sequelize)
+
+0.DBMS 설치(MySQL)
+
+root 비번
+aA!12345
+
+1.Sequelize
+	설치패키지(모듈)
+	sequelize
+	sequelize-cli - 명령어
+	mysql2 - sequelize와 DBMS(MySQL) 연동을 하는 드라이버
+
+	
+	npm i sequelize sequelize-cli mysql2
+
+    필요한 폴더, 설정 파일
+
+    npx sequelize init  //npx -> node_modules에 있는걸 실행할때 쓰는 명령어
+
+    생긴 폴더
+    config - 데이터베이스 연결 설정(config.json)
+        config/config.json
+            development - 개발 중일때 쓰는것
+            production - 실제 서비스 할때 쓰는것
+            database -> 워크벤치에 설정해준 이름
+            password -> 워크벤치에서 설정한 비번
+    models - 데이터베이스에서 데이터 추출 또는 그와 관련된 설정등의 로직
+            - index.js -> 설정을 완료
+
+    MVC
+
+DB 연결
+sequelize 인스턴스
+    .sync({ force: true }) //true; 기존게 있으면 싹 지우고 새로 시작하고, false; 기존거 지우지 않고 테이블이 있으면 건너뛰고 쓰는것
+        .then()--> //DB 연결 성공
+        .catch()--> //DB 연결 실패
+
+SQL 실행
+sequelize 인스턴스
+    .query(sql, {
+        replacements : SQL 실행시 변경, 추가, 삭제에 대한 변수 바인딩,
+        type : Querytypes(Sequelize).SELECT | INSERT | UPDATE | DELETE
+    })
+
+회원가입, 로그인, 로그아웃
+
+1. npm init -> package.json
+    -> script -> 사용자 정의 명령어
+    
+2. 필요한 모듈(패키지)
+npm i express nunjucks morgan cookie-parser express-session dotenv
++ sequelize sequelize-cli mysql2
+
+npm i -D nodemon
+
+3. app.js
+
+4. .env
+
+5. 라우터
+    routes/index.js
+    /
+
+    routes/member.js
+    /member/join
+        - 양식(form) - GET
+        - 회원가입 처리 - POST
+
+    /member/login
+        - 양식(form) - GET
+        - 로그인 처리 - POST
+
+    /member/logout
+        - GET
+
+6. 데이터베이스 설정
+    (sequelize, sequelize-cli, mysql2)
+
+    1) npx sequelize init
+
+    2) config/config.json -> 데이터베이스 접속 계정
+
+7. 데이터베이스 테이블 생성 
+USE nodejs;
+
+CREATE TABLE member (
+	memNo INTEGER AUTO_INCREMENT,
+    memId VARCHAR(20) NOT NULL UNIQUE,
+    memPw VARCHAR(65) NOT NULL,
+    memNm VARCHAR(20) NOT NULL,
+    PRIMARY KEY(memNo)
+);
+
+8. 테이블 비우기 
+TRUNCATE 테이블명;
+
+8. 암호화 해시 bcrypt
+npm i bcrypt 
+
+.sync 
+.query
+
+sequelize 인스턴스
+			.query(sql, {
+				replacements : 바인딩될 데이터,
+				type : QueryTypes.SELECT | INSERT | UPDATE | DELETE
+			});
+			
+npm i sequelize sequelize-cli mysql2
+npx sequelize init 
+config/config.json
+models/index.js
