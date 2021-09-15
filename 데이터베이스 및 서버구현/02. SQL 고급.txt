@@ -84,6 +84,7 @@
 4-9. DBMS 서버에 설정된 현재 날짜, 시간, 요일
 
 		NULL 값 처리 - P221
+<<<<<<< HEAD
 			- 값이 입력이 안되어 있는 상태
 			- 빈값(X), 0(X), 빈문자 (X) -> 입력이 되어 있는 상태 
 			- 비교 조건 검색 X 
@@ -226,3 +227,32 @@
         LIKE
 
         
+=======
+		
+
+
+++++++++++++++++++++
+SELECT *
+FROM Mybook
+WHERE price IS NULL OR price = '';  -> NULL 값일수도, 빈값일수도 있기 때문에 이렇게 검색하는 것이 좋음
+++++++++++++++++++++
+
+
+		행번호 출력 - P223
+
+2. 부속질의
+	1) 스칼라 부속질의 - SELECT 절
+
+    +++++++++++
+    SET SQL_SAFE_UPDATES=0;  <- UPDATE 안되는 경우 추가 막아놔서 그런듯
+    UPDATE Orders o
+    SET o.bname=(SELECT bookname FROM Book b WHERE o.bookid = b.bookid);  
+    ++++++++++++++++++++
+
+	2) 인라인뷰 - FROM 절 
+	3) 중첩질의 - WHERE 절 
+
+
+3. 뷰
+
+>>>>>>> 845754cfdabadbe258646d17558c67e038f7c4d1
