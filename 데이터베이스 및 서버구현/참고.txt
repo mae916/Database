@@ -3,7 +3,7 @@ CALL InsertBook(18, "책", "출판사", 15000);
 SELECT * FROM Book;
 
 삭제
-CALL InsertBook(18, "책", "출판사", 15000);
+CALL DeleteBook(18, "책", "출판사", 15000);
 SELECT * FROM Book;
 
 
