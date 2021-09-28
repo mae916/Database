@@ -1,0 +1,55 @@
+추가
+CALL InsertBook(18, "책", "출판사", 15000);
+SELECT * FROM Book;
+
+삭제
+CALL InsertBook(18, "책", "출판사", 15000);
+SELECT * FROM Book;
+
+
+
+0부터 100까지 더하는것
+DELIMITER **
+CREATE PROCEDURE total100()
+
+BEGIN
+    DECLARE addNum INTEGER DEFAULT 0;
+    SET @total = 0;
+    
+    WHILE addNum <= 100 DO
+		SET @total = @total + addNum;
+        SET addNum = addNum + 1;
+	END WHILE;
+END;
+**
+
+0부터 100까지 더한 결과 보기
+CALL total100();
+SELECT @total;
+
+
+트리거 만들 자료(?)
+CREATE TABLE Book_log (
+	bookid_l INTEGER,
+    bookname_l VARCHAR(40),
+    publisher_l VARCHAR(40),
+    price_l INTEGER
+)
+
+트리거 만들기
+DELIMITER **
+
+CREATE TRIGGER AfterInsertBook
+	AFTER INSERT ON Book FOR EACH ROW
+BEGIN
+	INSERT INTO Book_log
+    VALUES (new.bookid, new,bookname, new.publisher, new.price);
+END;
+
+**
+
+트리거 보기
+SHOW TRIGGERS;
+
+CALL InsertBook(19, "책2", "출판사2", 15000);
+SELECT * FROM Book_log;
